@@ -1,7 +1,7 @@
 
 public class Patient {
 	
-	private identification ID;
+	//private identification ID;
 	
 	
 	
