@@ -1,9 +1,9 @@
 
 public class Identification {
-	
+
 	private String nom;
 	private String prenom;
-	
+
 	public Identification(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -24,21 +24,18 @@ public class Identification {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	
-	/*public boolean equal(){
-		if 
-	}*/
+
+	/*
+	 * public boolean equal(){ if }
+	 */
 
 	public String toString() {
 		return "nom=" + nom + ", prenom=" + prenom;
 	}
-	
-	public void clone(Identification e){
+
+	public void clone(Identification e) {
 		this.nom = e.getNom();
 		this.prenom = e.getPrenom();
 	}
-	
-
-	
 
 }
