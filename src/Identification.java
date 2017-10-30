@@ -8,6 +8,10 @@ public class Identification {
 		this.nom = nom;
 		this.prenom = prenom;
 	}
+	
+	public Identification(Identification ID) {
+		this.clone(ID);
+	}
 
 	public String getNom() {
 		return nom;
