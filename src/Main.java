@@ -10,9 +10,9 @@ public class Main {
 		System.out.println(p.toString());
 		
 		Patient f = new Patient(35, i);
-		
+
 		System.out.println(f.toString());
-	
+
 	}
 
 }
