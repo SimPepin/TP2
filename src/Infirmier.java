@@ -74,8 +74,8 @@ public class Infirmier {
 	public Infirmier clone(Infirmier infirmier){
 		
 		Identification copieID = this.getiD();
-		boolean copieDisponibilité = this.isDisponible();
-		Infirmier copieInfirmier = new Infirmier(copieID,copieDisponibilité);
+		boolean copieDisponibilite = this.isDisponible();
+		Infirmier copieInfirmier = new Infirmier(copieID,copieDisponibilite);
 		return copieInfirmier;
 
 	}
