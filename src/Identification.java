@@ -9,8 +9,9 @@ public class Identification {
 		this.prenom = prenom;
 	}
 
-	public Identification(Identification ID) {
-		this.clone(ID);
+	public Identification(Identification iD) {
+		this.prenom = iD.getPrenom();
+		this.nom = iD.getNom();
 	}
 
 	public String getNom() {
@@ -37,9 +38,8 @@ public class Identification {
 		return "nom=" + nom + ", prenom=" + prenom;
 	}
 
-	public void clone(Identification e) {
-		this.nom = e.getNom();
-		this.prenom = e.getPrenom();
+	public	Identification clone(Identification ancienID) {
+		return new Identification(ancienID.getNom(), ancienID.getPrenom()) ;
 	}
 
 }

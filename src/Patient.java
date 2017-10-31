@@ -1,19 +1,20 @@
 
 public class Patient {
 	private int numAssuranceSocial;
-	private Identification ID;
+	private Identification iD;
 
-	public Patient(int numAssuranceSocial, Identification ID) {
+	public Patient(int numAssuranceSocial, Identification iD) {
 
 		this.numAssuranceSocial = numAssuranceSocial;
-		this.ID = ID;
+		this.iD = iD;
 	}
 
 	/*
 	 * Constructeur Par copie ** À vérifier **
 	 */
 	public Patient(Patient patient) {
-		this.clonePatient(patient);
+		this.iD = patient.getID();
+		this.numAssuranceSocial = patient.getNumAssuranceSocial();
 	}
 
 	public int getNumAssuranceSocial() {
@@ -25,24 +26,23 @@ public class Patient {
 	}
 
 	public Identification getID() {
-		return ID;
+		return iD;
 	}
 
-	public void setID(Identification ID) {
-		this.ID = ID;
+	public void setID(Identification iD) {
+		this.iD = iD;
 	}
 
 	/*
 	 * On clone le patient actuel
 	 */
-	public void clonePatient(Patient patient) {
-		this.setID(new Identification(patient.getID()));
-		this.setNumAssuranceSocial(patient.getNumAssuranceSocial());
+	public Patient clonePatient(Patient patient) {
+		return new Patient(patient.getNumAssuranceSocial(), patient.getID());
 	}
 
 	@Override
 	public String toString() {
-		return " Prenom " + ID.getPrenom() + " Nom " + ID.getNom() + " numéro d'assurance sociale "
+		return " Prenom " + iD.getPrenom() + " Nom " + iD.getNom() + " numéro d'assurance sociale "
 				+ numAssuranceSocial;
 	}
 
