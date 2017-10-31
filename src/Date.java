@@ -1,10 +1,10 @@
-import java.util.Date;
+///import java.util.Date;
 
-
+/*
 public class Date {
 	
 	
-	int année = 0;
+	/*int année = 0;
 	int mois = 0;
 	int jour = 0;
 	int heure = 0;
@@ -23,4 +23,4 @@ public class Date {
 	
 	
 	
-}
+}*/
