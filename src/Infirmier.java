@@ -13,10 +13,10 @@ public class Infirmier {
 		this.disponible = true;
 		
 	}
-	public Infirmier(Identification iD, boolean disponibilité) {
+	public Infirmier(Identification iD, boolean disponibilite) {
 		
 		this.iD = iD;
-		this.disponible = disponibilité;
+		this.disponible = disponibilite;
 		
 	}
 	/**
