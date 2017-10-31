@@ -30,9 +30,7 @@ public class Identification {
 		this.prenom = prenom;
 	}
 
-	/*
-	 * public boolean equal(){ if }
-	 */
+	
 
 	public String toString() {
 		return "nom=" + nom + ", prenom=" + prenom;
