@@ -1,6 +1,11 @@
 
 public class Calendrier {
-
+	
+	private PlageHoraire unHoraire;
+	private Calendrier next;
+	
+	
+	
 	public boolean ajouterRendezVous(RendezVous rdvAjout) {
 		return false;
 	}

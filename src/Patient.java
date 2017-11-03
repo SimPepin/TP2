@@ -33,6 +33,31 @@ public class Patient {
 		this.iD = iD;
 	}
 
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		Patient objPatient = (Patient) obj;
+
+		if (objPatient.getID().getPrenom() == null) {
+			if (this.getID().getPrenom() == null) {
+				return false;
+			}
+
+		}
+		if (objPatient.getID().getNom() == null) {
+			if (this.getID().getNom() == null) {
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
 	/*
 	 * On clone le patient actuel
 	 */

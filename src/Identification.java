@@ -30,14 +30,37 @@ public class Identification {
 		this.prenom = prenom;
 	}
 
-	
+	public boolean equals(Object obj) {
+
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+
+		Identification objID = (Identification) obj;
+
+		if (objID.getNom() == null) {
+			if (this.nom == null) {
+				return false;
+			}
+		}
+		
+		if(objID.getPrenom() == null) {
+			if(this.prenom == null) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	public String toString() {
 		return "nom=" + nom + ", prenom=" + prenom;
 	}
 
-	public	Identification clone(Identification ancienID) {
-		return new Identification(ancienID.getNom(), ancienID.getPrenom()) ;
+	public Identification clone(Identification ancienID) {
+		return new Identification(ancienID.getNom(), ancienID.getPrenom());
 	}
 
 }

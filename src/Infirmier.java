@@ -1,24 +1,26 @@
 
 public class Infirmier {
 
-	
-	
-	
 	private Identification iD;
-	boolean disponible = true;	
-		
-	public Infirmier(String prenom, String nom) {
-		
-		this.iD = new Identification (prenom, nom);
-		this.disponible = true;
-		
+	boolean disponible = true;
+
+	public Infirmier() {
 	}
+
+	public Infirmier(String prenom, String nom) {
+
+		this.iD = new Identification(prenom, nom);
+		this.disponible = true;
+
+	}
+
 	public Infirmier(Identification iD, boolean disponibilite) {
-		
+
 		this.iD = iD;
 		this.disponible = disponibilite;
-		
+
 	}
+
 	/**
 	 * @return the iD
 	 */
@@ -27,7 +29,8 @@ public class Infirmier {
 	}
 
 	/**
-	 * @param The iD to set
+	 * @param The
+	 *            iD to set
 	 */
 	public void setiD(Identification iD) {
 		this.iD = iD;
@@ -41,7 +44,8 @@ public class Infirmier {
 	}
 
 	/**
-	 * @param Definir la disponibilité de l'infirmier
+	 * @param Definir
+	 *            la disponibilité de l'infirmier
 	 */
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
@@ -51,7 +55,7 @@ public class Infirmier {
 	public String toString() {
 		return "Infirmier [iD=" + iD + ", disponible=" + disponible + "]";
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -71,25 +75,13 @@ public class Infirmier {
 		return true;
 	}
 
-	public Infirmier clone(Infirmier infirmier){
-		
+	public Infirmier clone(Infirmier infirmier) {
+
 		Identification copieID = this.getiD();
 		boolean copieDisponibilite = this.isDisponible();
-		Infirmier copieInfirmier = new Infirmier(copieID,copieDisponibilite);
+		Infirmier copieInfirmier = new Infirmier(copieID, copieDisponibilite);
 		return copieInfirmier;
 
 	}
 
-
-	
-
-
-
-	
-	
-	
-	
-	
-	
-	
 }
