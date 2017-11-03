@@ -1,68 +1,33 @@
-<<<<<<< HEAD
+
 public class RendezVous {
-	
+
 	private Patient p;
 	private Docteur d;
 	private Infirmier i;
-	
-	public RendezVous(Patient p, Docteur d, Infirmier i){
+
+	public RendezVous(Patient p, Docteur d, Infirmier i) {
 		this.p = p;
 		this.d = d;
 		this.i = i;
 	}
-	
-	public Patient getPatient(){
+
+	public Patient getPatient() {
 		return this.p;
 	}
-	
-	public Docteur getDocteur(){
+
+	public Docteur getDocteur() {
 		return this.d;
 	}
-	
-	public Infirmier getInfirmier(){
+
+	public Infirmier getInfirmier() {
 		return this.i;
 	}
-	
-	public void setPatient(Patient e){
+
+	public void setPatient(Patient e) {
 		this.p = e;
 	}
 
-	public void setDocteur(Docteur e){
+	public void setDocteur(Docteur e) {
 		this.d = e;
 	}
-	
-=======
-public class RendezVous {
-	
-	private Patient p;
-	private Docteur d;
-	private Infirmier i;
-	
-	public RendezVous(Patient p, Docteur d, Infirmier i){
-		this.p = p;
-		this.d = d;
-		this.i = i;
-	}
-	
-	public Patient getPatient(){
-		return this.p;
-	}
-	
-	public Docteur getDocteur(){
-		return this.d;
-	}
-	
-	public Infirmier getInfirmier(){
-		return this.i;
-	}
-	
-	public void setPatient(Patient e){
-		this.p = e;
-	}
-
-	public void setDocteur(Docteur e){
-		this.d = e;
-	}
-	
->>>>>>> 65e5f5036e9ebd1f7dd1160017245ffc3304f252
 }
