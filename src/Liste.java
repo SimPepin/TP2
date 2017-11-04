@@ -23,7 +23,7 @@ public class Liste {
 			tete = new Maillon(nouvelleDate, tete);
 		} else {
 			Maillon tmpPrecedent = tete;
-			Maillon tmpSuivant = tmpPrecedent.getNext();
+			Maillon tmpSuivant = tete.getNext();
 
 			while (tmpSuivant != null && tmpSuivant.getUneDate().dateRendezVous.before(nouvelleDate.getDate())) {
 				tmpPrecedent = tmpSuivant;
@@ -46,10 +46,15 @@ public class Liste {
 
 		else {
 			Maillon maillonPrécédent = null;
-			Maillon tmpPrecendent = tete;
-			Maillon tmpSuivant = tmpPrecendent.getNext();
-			
-			if()
+			Maillon tmpSuivant = tete.getNext();
+
+			while (tmpSuivant != null && tmpSuivant.getUneDate().dateRendezVous.before(dateARetirer.getDate())) {
+				maillonPrécédent = tmpSuivant;
+				tmpSuivant = tmpSuivant.getNext();
+			}
+			if (tmpSuivant != null && tmpSuivant.getUneDate().dateRendezVous == dateARetirer.getDate()) {
+				maillonPrécédent.setNext(tmpSuivant.getNext());
+			}
 		}
 	}
 
