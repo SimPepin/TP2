@@ -1,6 +1,7 @@
 
 public class Calendrier {
 		
+	private	Liste listeCalendrier;
 	
 	public boolean ajouterRendezVous(RendezVous rdvAjout) {
 		return false;
