@@ -1,7 +1,7 @@
 
 public class Calendrier {
 
-	public ListePlageHoraire listePlageHoraire;
+	public ListePlageHoraire listePlageHoraire = new ListePlageHoraire();
 
 	public void setListePlageHoraire(ListePlageHoraire listePlageHoraire) {
 		this.listePlageHoraire = listePlageHoraire;
@@ -77,9 +77,12 @@ public class Calendrier {
 
 	// Affiche comme la tête d'une file.
 	public PlageHoraire obtenirPLageHoraire() {
-
-		return listePlageHoraire.SortirPremierePlage();
-
+		try {
+			return listePlageHoraire.SortirPremierePlage();
+		} catch (Exception e) {
+			System.out.println("Le calendrier ne contient pas encore de plage horaire");
+		} 
+		return null;
 	}
 
 	public boolean annulerRendezVous(RendezVous rdvAnnule) {

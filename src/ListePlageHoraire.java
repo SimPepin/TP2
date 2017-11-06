@@ -81,7 +81,7 @@ public class ListePlageHoraire {
 	}
 
 	// Affiche la première plage horaire dans la liste.
-	public PlageHoraire SortirPremierePlage() {
+	public PlageHoraire SortirPremierePlage() throws Exception{
 		Maillon premierMaillon = tete;
 		tete = tete.getNext();
 		return premierMaillon.getUneDate();
