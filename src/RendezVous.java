@@ -30,4 +30,11 @@ public class RendezVous {
 	public void setDocteur(Docteur e) {
 		this.d = e;
 	}
+
+	@Override
+	public String toString() {
+		return "RendezVous [p=" + p + ", d=" + d + ", i=" + i + "]";
+	}
+	
+	
 }

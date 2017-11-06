@@ -1,18 +1,14 @@
-
 import java.util.Date;
 import java.util.ArrayList;
 
 public class PlageHoraire {
 
 	Date dateRendezVous;
-	ArrayList listeRendezVous;
-
-	public PlageHoraire() {
-	}
+	ArrayList<RendezVous> listeRendezVous;
 
 	public PlageHoraire(Date dateRendezVous) {
 		this.dateRendezVous = dateRendezVous;
-		this.listeRendezVous = new ArrayList();
+		this.listeRendezVous = new ArrayList<RendezVous>();
 	}
 
 	/**
@@ -39,18 +35,22 @@ public class PlageHoraire {
 	}
 
 	/**
-	 * @param Cette
-	 *            méthode publique reçoit un rendez-vous et l’ajoute à cette
-	 *            plage horaire. Elle retourne true si l'ajout réussit et false si
-	 *            le rendez-vous y étais déjà présent.
+	 * Cette méthode publique reçoit un rendez-vous et l’ajoute à cette plage
+	 * horaire. Elle retourne true si l'ajout réussit et false si le rendez-vous y
+	 * étais déjà présent.
+	 * 
+	 * @param dateRendezVous
+	 * 
+	 * @return boolean
 	 */
-	public void addRendezVous(Date dateRendezVous) {
+	public boolean add(RendezVous unRendezVous) {
 
-	}
-
-	public boolean contains(Date dateRendezVous) {
+		if (listeRendezVous.contains(unRendezVous)) {
+			return false;
+		} else {
+			listeRendezVous.add(unRendezVous);
+		}
 		return false;
-
 	}
 
 	/*
@@ -59,7 +59,7 @@ public class PlageHoraire {
 	 */
 	@Override
 	public String toString() {
-		return "PlageHoraire [dateRendezVous=" + dateRendezVous + ", listeRendezVous=" + listeRendezVous + "]";
+		return "PlageHoraire [dateRendezVous=" + dateRendezVous + ", listeRendezVous=" + listeRendezVous + "] ";
 	};
 
 }

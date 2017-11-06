@@ -30,9 +30,11 @@ public class Maillon {
 		this.next = next;
 	}
 
-	// Vérifier si le maillon actuel est équivalent à la valeur recherché.
-	/*
-	 * public boolean comparerMaillon() { if(maillonComparer == this.next) { return
-	 * true; } else return false; }
-	 */
+	@Override
+	public String toString() {
+		return "Maillon [uneDate=" + uneDate + ", next=" + next + "]";
+	}
+	
+	
+	
 }

@@ -1,10 +1,32 @@
 
-public class Liste {
+public class ListePlageHoraire {
 
 	private Maillon tete;
-
+	private Maillon next;
 	public boolean listeVide() {
 		return tete == null;
+	}
+	
+	public ListePlageHoraire() {
+		this.tete = tete;
+		this.next = next;
+	}
+	
+
+	public Maillon getTete() {
+		return tete;
+	}
+
+	public void setTete(Maillon tete) {
+		this.tete = tete;
+	}
+
+	public Maillon getNext() {
+		return next;
+	}
+
+	public void setNext(Maillon next) {
+		this.next = next;
 	}
 
 	/**
@@ -34,7 +56,7 @@ public class Liste {
 
 	}
 
-	public void retirerDeLaListe(PlageHoraire dateARetirer) {
+	public void retirerDeLaListe(PlageHoraire dateARetirer) throws Exception {
 		// Vérifie que la liste n'est pas vide.
 		if (listeVide()) {
 			return;
@@ -46,7 +68,7 @@ public class Liste {
 
 		else {
 			Maillon maillonPrécédent = null;
-			Maillon tmpSuivant = tete.getNext();
+			Maillon tmpSuivant = tete;
 
 			while (tmpSuivant != null && tmpSuivant.getUneDate().dateRendezVous.before(dateARetirer.getDate())) {
 				maillonPrécédent = tmpSuivant;
@@ -59,10 +81,16 @@ public class Liste {
 	}
 
 	// Affiche la première plage horaire dans la liste.
-	public PlageHoraire AfficherPremierePlage() {
+	public PlageHoraire SortirPremierePlage() {
 		Maillon premierMaillon = tete;
 		tete = tete.getNext();
 		return premierMaillon.getUneDate();
 	}
 
+	@Override
+	public String toString() {
+		return "ListePlageHoraire [tete=" + tete + "]";
+	}
+	
+	
 }

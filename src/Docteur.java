@@ -29,5 +29,12 @@ public class Docteur {
 	public Identification getid() {
 		return iD;
 	}
+
+	@Override
+	public String toString() {
+		return "Docteur [numeroDepartement=" + numeroDepartement + ", iD=" + iD + "]";
+	}
+	
+	
 }
 
