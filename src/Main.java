@@ -1,8 +1,5 @@
 
-import java.util.Date;
 import java.util.Scanner;
-
-import jdk.nashorn.internal.ir.LexicalContext;
 
 public class Main {
 	public static Calendrier leCalendrier = new Calendrier();
@@ -10,16 +7,8 @@ public class Main {
 	public static Scanner entrerUsager = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		/*
-		 * //Test pour les classes à ne pas prendre en considération et supprimer après.
-		 * //System.out.println("test"); //System.out.println("test");
-		 * //System.out.println("testSami"); System.out.println("testSami");
-		 * System.out.println("testSami");
-		 */
-		
-		int valeurEntre =0;
+		int valeurEntre = 0;
 		menu(valeurEntre);
-
 	}
 
 	public static void choixUsager(int valeurEntre) {
@@ -42,35 +31,31 @@ public class Main {
 		case 8:
 			break;
 		case 9:
+			sortirPremierePlage();
 			break;
 		case 10:
-			try {
-				leCalendrier.listePlageHoraire.SortirPremierePlage();
-			} catch (Exception e) {
-				System.out.println("Le calendrier ne contient pas encore de plage horaire");
-			}finally {
-				menu(0);
-			}	
+
 			break;
 		case 11:
 			break;
 		case 12:
 			break;
 		case 13:
+
 			break;
 		case 14:
-			System.out.println("bye bye");
-			System.exit(0);
+			quitter();
 			break;
 
 		default:
 			break;
 		}
 	}
-	
+
 	public static void menu(int valeurEntre) {
-		System.out.println("1) Ajouter un docteur\r\n" + "2) Ajouter un infirmier\r\n" + "3) Ajouter un patient\r\n"
-				+ "4) Ajouter un rendez-vous\r\n" + "5) Trouver un rendez-vous pour un patient\r\n"
+		System.out.println("Bienvenue à la clinique \r\n" + "1) Ajouter un docteur\r\n" + "2) Ajouter un infirmier\r\n"
+				+ "3) Ajouter un patient\r\n" + "4) Ajouter un rendez-vous\r\n"
+				+ "5) Trouver un rendez-vous pour un patient\r\n"
 				+ "6) Afficher le prochain rendez-vous d'un docteur\r\n"
 				+ "7) Afficher le prochain rendez-vous d'un infirmier\r\n"
 				+ "8) Afficher le prochain rendez-vous d'un patient\r\n" + "9) Passer à la prochaine plage horaire\r\n"
@@ -79,9 +64,25 @@ public class Main {
 				+ "14) Quitter");
 
 		while (valeurEntre != 14) {
+			System.out.println("-->");
 			valeurEntre = entrerUsager.nextInt();
 			choixUsager(valeurEntre);
 		}
+	}
+
+	public static void sortirPremierePlage() {
+		try {
+			leCalendrier.listePlageHoraire.SortirPremierePlage();
+		} catch (Exception e) {
+			System.out.println("Le calendrier ne contient pas encore de plage horaire");
+		} finally {
+			menu(0);
+		}
+	}
+
+	public static void quitter() {
+		System.out.println("bye bye");
+		System.exit(0);
 	}
 
 	/*

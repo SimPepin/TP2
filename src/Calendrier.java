@@ -1,3 +1,4 @@
+import java.rmi.UnexpectedException;
 
 public class Calendrier {
 
@@ -6,10 +7,33 @@ public class Calendrier {
 	public void setListePlageHoraire(ListePlageHoraire listePlageHoraire) {
 		this.listePlageHoraire = listePlageHoraire;
 	}
-
+/*
+ * À compléter
+ */
 	public boolean ajouterRendezVous(RendezVous rdvAjout) {
 
 		return false;
+	}
+/*
+ * À compléter 
+ */
+	private PlageHoraire obtenirPlageHoraire(RendezVous rdvAjout) {
+
+		// Pas trop certain PAS BON !
+
+		Maillon plageAChercher = listePlageHoraire.getTete();
+		// PlageHoraire plageAChercher = plageAChercher.
+		while (plageAChercher != null) {
+			for (int i = 0; i < plageAChercher.getUneDate().listeRendezVous.size(); i++) {
+				if (plageAChercher.getUneDate().listeRendezVous.get(i) == rdvAjout) {
+					return plageAChercher.getUneDate();
+				}
+
+			}
+			plageAChercher = plageAChercher.getNext();
+		}
+		return null;
+
 	}
 
 	public RendezVous obtenirProchainRendezVousPatient(Patient unPatient) {
@@ -81,11 +105,38 @@ public class Calendrier {
 			return listePlageHoraire.SortirPremierePlage();
 		} catch (Exception e) {
 			System.out.println("Le calendrier ne contient pas encore de plage horaire");
-		} 
+		}
 		return null;
 	}
 
 	public boolean annulerRendezVous(RendezVous rdvAnnule) {
+
+		Maillon unePlageHoraire = listePlageHoraire.getTete();
+
+		while (unePlageHoraire != null) {
+
+			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
+				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getDocteur() == rdvAnnule.getDocteur()
+						&& unePlageHoraire.getUneDate().listeRendezVous.get(i).getPatient() == rdvAnnule.getPatient()
+						&& unePlageHoraire.getUneDate().listeRendezVous.get(i).getInfirmier() == rdvAnnule
+								.getInfirmier()) {
+					unePlageHoraire.getUneDate().listeRendezVous.remove(i);
+					if (unePlageHoraire.getUneDate().listeRendezVous.isEmpty()) {
+						try {
+							listePlageHoraire.retirerDeLaListe(unePlageHoraire.getUneDate());
+						} catch (Exception e) {
+							System.out.println("Le calendrier ne contient pas encore de plage horaire");
+						}
+
+					}
+					return true;
+				}
+			}
+
+			unePlageHoraire = unePlageHoraire.getNext();
+
+		}
+		System.out.println("Ce rendez-vous ne peut pas être annulé, car il n'existe pas");
 		return false;
 	}
 
