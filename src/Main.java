@@ -23,6 +23,7 @@ public class Main {
 		case 4:
 			break;
 		case 5:
+			trouverRDVPatient();
 			break;
 		case 6:
 			break;
@@ -53,15 +54,15 @@ public class Main {
 	}
 
 	public static void menu(int valeurEntre) {
-		System.out.println("Bienvenue à la clinique \r\n" + "1) Ajouter un docteur\r\n" + "2) Ajouter un infirmier\r\n"
-				+ "3) Ajouter un patient\r\n" + "4) Ajouter un rendez-vous\r\n"
-				+ "5) Trouver un rendez-vous pour un patient\r\n"
-				+ "6) Afficher le prochain rendez-vous d'un docteur\r\n"
-				+ "7) Afficher le prochain rendez-vous d'un infirmier\r\n"
-				+ "8) Afficher le prochain rendez-vous d'un patient\r\n" + "9) Passer à la prochaine plage horaire\r\n"
-				+ "10) Afficher le calendrier complet\r\n" + "11) Afficher le calendrier complet d'un docteur\r\n"
-				+ "12) Afficher le calendrier complet d'un infirmier\r\n" + "13) Annuler un rendez-vous\r\n"
-				+ "14) Quitter");
+		System.out.println("Bienvenue à la clinique \r\n" + "Que voulez-vous faire ? \r\n"+ "1 - Ajouter un docteur\r\n" + "2 - Ajouter un infirmier\r\n"
+				+ "3 - Ajouter un patient\r\n" + "4 - Ajouter un rendez-vous\r\n"
+				+ "5 - Trouver un rendez-vous pour un patient\r\n"
+				+ "6 - Afficher le prochain rendez-vous d'un docteur\r\n"
+				+ "7 - Afficher le prochain rendez-vous d'un infirmier\r\n"
+				+ "8 - Afficher le prochain rendez-vous d'un patient\r\n" + "9 - Passer à la prochaine plage horaire\r\n"
+				+ "10- Afficher le calendrier complet\r\n" + "11- Afficher le calendrier complet d'un docteur\r\n"
+				+ "12- Afficher le calendrier complet d'un infirmier\r\n" + "13- Annuler un rendez-vous\r\n"
+				+ "14- Quitter");
 
 		while (valeurEntre != 14) {
 			System.out.println("-->");
@@ -69,6 +70,12 @@ public class Main {
 			choixUsager(valeurEntre);
 		}
 	}
+	
+	public static void trouverRDVPatient() {
+		
+	}
+	
+	//public static void
 
 	public static void sortirPremierePlage() {
 		try {

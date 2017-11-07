@@ -7,16 +7,18 @@ public class Calendrier {
 	public void setListePlageHoraire(ListePlageHoraire listePlageHoraire) {
 		this.listePlageHoraire = listePlageHoraire;
 	}
-/*
- * À compléter
- */
+
+	/*
+	 * À compléter
+	 */
 	public boolean ajouterRendezVous(RendezVous rdvAjout) {
 
 		return false;
 	}
-/*
- * À compléter 
- */
+
+	/*
+	 * À compléter
+	 */
 	private PlageHoraire obtenirPlageHoraire(RendezVous rdvAjout) {
 
 		// Pas trop certain PAS BON !
@@ -32,6 +34,7 @@ public class Calendrier {
 			}
 			plageAChercher = plageAChercher.getNext();
 		}
+		// retourne null, car cette plage horaire n'est pas dans la liste.
 		return null;
 
 	}
