@@ -1,4 +1,5 @@
 import java.rmi.UnexpectedException;
+import java.util.Date;
 
 public class Calendrier {
 
@@ -11,32 +12,55 @@ public class Calendrier {
 	/*
 	 * À compléter
 	 */
-	public boolean ajouterRendezVous(RendezVous rdvAjout) {
+	
+	public boolean ajouterRendezVous(RendezVous rdvAjout, Date date) {
+		
+		if (date.getHours() < 8 || date.getHours() > 20) {
 
-		return false;
+			return false;
+		}
+		if (date.getMinutes() % 30 != 0) {
+			return false;
+		}
+		
+		
+		for (int i = 0; i < obtenirPlageHoraire(date).listeRendezVous.size(); i++) {
+			if (obtenirPlageHoraire(date).listeRendezVous.get(i).getDocteur() != rdvAjout.getDocteur()
+					&& obtenirPlageHoraire(date).listeRendezVous.get(i).getInfirmier() != rdvAjout.getInfirmier()) {
+				
+				PlageHoraire plageExiste = obtenirPlageHoraire(date);
+				plageExiste.add(rdvAjout);
+				listePlageHoraire.ajoutDansListe(plageExiste);
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		PlageHoraire plageExistPas = new PlageHoraire(date);
+		
+		plageExistPas.add(rdvAjout);
+		listePlageHoraire.ajoutDansListe(plageExistPas);
+		return true;
+
 	}
 
 	/*
 	 * À compléter
 	 */
-	private PlageHoraire obtenirPlageHoraire(RendezVous rdvAjout) {
-
-		// Pas trop certain PAS BON !
-
-		Maillon plageAChercher = listePlageHoraire.getTete();
-		// PlageHoraire plageAChercher = plageAChercher.
-		while (plageAChercher != null) {
-			for (int i = 0; i < plageAChercher.getUneDate().listeRendezVous.size(); i++) {
-				if (plageAChercher.getUneDate().listeRendezVous.get(i) == rdvAjout) {
-					return plageAChercher.getUneDate();
-				}
-
+	private PlageHoraire obtenirPlageHoraire(Date date) {
+		
+		Maillon unePlageHoraire = listePlageHoraire.getTete();
+		while (unePlageHoraire != null) {
+			if (unePlageHoraire.getUneDate().getDate().equals(date)) {
+				PlageHoraire plage = unePlageHoraire.getUneDate();
+				return plage;
 			}
-			plageAChercher = plageAChercher.getNext();
+			unePlageHoraire = unePlageHoraire.getNext();
 		}
-		// retourne null, car cette plage horaire n'est pas dans la liste.
-		return null;
-
+		PlageHoraire nvPlage = new PlageHoraire(date);
+		return nvPlage;
 	}
 
 	public RendezVous obtenirProchainRendezVousPatient(Patient unPatient) {
@@ -51,9 +75,7 @@ public class Calendrier {
 					return unePlageHoraire.getUneDate().listeRendezVous.get(i);
 				}
 			}
-
 			unePlageHoraire = unePlageHoraire.getNext();
-
 		}
 
 		System.out.println("Ce patient n'a pas de rendez-vous");
@@ -103,7 +125,7 @@ public class Calendrier {
 	}
 
 	// Affiche comme la tête d'une file.
-	public PlageHoraire obtenirPLageHoraire() {
+	public PlageHoraire obtenirProchainePLageHoraire() {
 		try {
 			return listePlageHoraire.SortirPremierePlage();
 		} catch (Exception e) {
@@ -141,6 +163,62 @@ public class Calendrier {
 		}
 		System.out.println("Ce rendez-vous ne peut pas être annulé, car il n'existe pas");
 		return false;
+	}
+
+	public void obtenirCalendirerDocteur(Docteur Docteur) {
+
+		Calendrier calendrierDuDocteur = new Calendrier();
+		ListePlageHoraire nouvelleListe = calendrierDuDocteur.listePlageHoraire;
+
+		Maillon unePlageHoraire = listePlageHoraire.getTete();
+
+		while (unePlageHoraire != null) {
+
+			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
+				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getDocteur() == Docteur) {
+
+					PlageHoraire nvPlageHoraire = new PlageHoraire(unePlageHoraire.getUneDate().dateRendezVous);
+					RendezVous rdvNvCalendrier = unePlageHoraire.getUneDate().listeRendezVous.get(i);
+
+					nvPlageHoraire.add(rdvNvCalendrier);
+					nouvelleListe.ajoutDansListe(nvPlageHoraire);
+
+				}
+			}
+
+			unePlageHoraire = unePlageHoraire.getNext();
+
+		}
+		calendrierDuDocteur.listePlageHoraire = nouvelleListe;
+
+	}
+
+	public void obtenirCalendirerInfirmier(Infirmier Infirmier) {
+
+		Calendrier calendrierInfirmier = new Calendrier();
+		ListePlageHoraire nouvelleListe = calendrierInfirmier.listePlageHoraire;
+
+		Maillon unePlageHoraire = listePlageHoraire.getTete();
+
+		while (unePlageHoraire != null) {
+
+			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
+				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getInfirmier() == Infirmier) {
+
+					PlageHoraire nvPlageHoraire = new PlageHoraire(unePlageHoraire.getUneDate().dateRendezVous);
+					RendezVous rdvNvCalendrier = unePlageHoraire.getUneDate().listeRendezVous.get(i);
+
+					nvPlageHoraire.add(rdvNvCalendrier);
+					nouvelleListe.ajoutDansListe(nvPlageHoraire);
+
+				}
+			}
+
+			unePlageHoraire = unePlageHoraire.getNext();
+
+		}
+		calendrierInfirmier.listePlageHoraire = nouvelleListe;
+
 	}
 
 }
