@@ -35,13 +35,13 @@ public class Main {
 		
 		//System.out.println(result);
 		
-		result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
+	//	result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
 		//System.out.println(result);
-		result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
+		//result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
 		//System.out.println(result);
-		result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,9,30) );
+		//result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,9,30) );
 		//System.out.println(result);
-		result = leCalendrier.ajouterRendezVous(rdv3, new Date(117,05,03,9,30) );
+		//result = leCalendrier.ajouterRendezVous(rdv3, new Date(117,05,03,9,30) );
 		//System.out.println(result);
 		//System.out.println(leCalendrier.listePlageHoraire.toString());
 		
@@ -57,18 +57,22 @@ public class Main {
 		laClinique.setCalendrier(leCalendrier);
 		
 		laClinique.ajouterDoctuer(d);
-		//laClinique.ajouterDoctuer(k);
+		laClinique.ajouterDoctuer(k);
 		laClinique.ajouterInfirmier(i);
 		laClinique.ajouterPatient(p);
 		laClinique.ajouterPatient(n);
+		
+		
 	
 		for (int m = 0; m < laClinique.docteur.size(); m++) {
 			System.out.println(laClinique.docteur.get(m));
 		}
-		
+		for (int m = 0; m < laClinique.patient.size(); m++) {
+			System.out.println(laClinique.patient.get(m));
+		}
 		System.out.println(leCalendrier.obtenirCalendirerInfirmier(i));
 		
-		laClinique.rendezVousPatient(n);
+		//laClinique.rendezVousPatient(n);
 		
 		
 		
