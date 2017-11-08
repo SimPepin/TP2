@@ -28,9 +28,7 @@ public class Calendrier {
 			if (obtenirPlageHoraire(date).listeRendezVous.get(i).getDocteur() != rdvAjout.getDocteur()
 					&& obtenirPlageHoraire(date).listeRendezVous.get(i).getInfirmier() != rdvAjout.getInfirmier()) {
 				
-				PlageHoraire plageExiste = obtenirPlageHoraire(date);
-				plageExiste.add(rdvAjout);
-				listePlageHoraire.ajoutDansListe(plageExiste);
+				obtenirPlageHoraire(date).listeRendezVous.add(rdvAjout);
 				return true;
 			}
 			else {

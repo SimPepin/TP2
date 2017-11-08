@@ -33,15 +33,20 @@ public class Main {
 		
 		System.out.println(result);
 		
-		result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
-		System.out.println(result);
-		result = leCalendrier.ajouterRendezVous(rdv2, new Date(117,05,03,8,00) );
-		System.out.println(result);
+		//result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
+		//System.out.println(result);
+		//result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
+		//System.out.println(result);
 		result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,9,30) );
 		System.out.println(result);
 		result = leCalendrier.ajouterRendezVous(rdv3, new Date(117,05,03,9,30) );
 		System.out.println(result);
 		System.out.println(leCalendrier.listePlageHoraire.toString());
+		
+		//leCalendrier.annulerRendezVous(rdv3);
+		leCalendrier.annulerRendezVous(rdv);
+		System.out.println(leCalendrier.listePlageHoraire.toString());
+		
 		
 	}
 
