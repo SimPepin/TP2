@@ -17,35 +17,61 @@ public class Main {
 		
 		Identification id = new Identification("une", "deux");
 		Identification id2 = new Identification("trois","quatre");
+		Identification id3 = new Identification("yolo", "swag");
 		Patient p = new Patient(123456, id);
 		Docteur d = new Docteur(id, 1);
 		Infirmier i = new Infirmier(id, true);
 		Infirmier  j = new Infirmier(id2, true);
 		Docteur  k = new Docteur(id2, 2);
 		Patient l = new Patient(89898, id2);
+		Patient n = new Patient(90978, id3);
 		
 		RendezVous rdv = new RendezVous(p, d, i);
 		RendezVous rdv2 = new RendezVous(p, d, i);
-		RendezVous rdv3	= new RendezVous(l, k, j);
+		RendezVous rdv3	= new RendezVous(l, d, j);
 		//leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,7,15,12) );
 		
 		boolean result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,7,15,12));
 		
-		System.out.println(result);
-		
-		//result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
 		//System.out.println(result);
-		//result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
+		
+		result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
+		//System.out.println(result);
+		result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,8,00) );
 		//System.out.println(result);
 		result = leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,9,30) );
-		System.out.println(result);
+		//System.out.println(result);
 		result = leCalendrier.ajouterRendezVous(rdv3, new Date(117,05,03,9,30) );
-		System.out.println(result);
-		System.out.println(leCalendrier.listePlageHoraire.toString());
+		//System.out.println(result);
+		//System.out.println(leCalendrier.listePlageHoraire.toString());
 		
 		//leCalendrier.annulerRendezVous(rdv3);
-		leCalendrier.annulerRendezVous(rdv);
-		System.out.println(leCalendrier.listePlageHoraire.toString());
+		//leCalendrier.annulerRendezVous(rdv);
+		//System.out.println(leCalendrier.listePlageHoraire.toString());
+		
+		//System.out.println(leCalendrier.obtenirProchainRendezVousPatient(l));
+		//System.out.println(leCalendrier.obtenirProchainRendezVousPatient(l));
+		//System.out.println(leCalendrier.obtenirProchainePLageHoraire());
+		//System.out.println(leCalendrier.listePlageHoraire.toString());
+		Clinique laClinique = new Clinique();
+		laClinique.setCalendrier(leCalendrier);
+		
+		laClinique.ajouterDoctuer(d);
+		//laClinique.ajouterDoctuer(k);
+		laClinique.ajouterInfirmier(i);
+		laClinique.ajouterPatient(p);
+		laClinique.ajouterPatient(n);
+	
+		for (int m = 0; m < laClinique.docteur.size(); m++) {
+			System.out.println(laClinique.docteur.get(m));
+		}
+		
+		System.out.println(leCalendrier.obtenirCalendirerInfirmier(i));
+		
+		laClinique.rendezVousPatient(n);
+		
+		
+		
 		
 		
 	}

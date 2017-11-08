@@ -3,16 +3,12 @@ import java.util.Date;
 
 public class Calendrier {
 
-	public ListePlageHoraire listePlageHoraire = new ListePlageHoraire();
+	public  ListePlageHoraire listePlageHoraire = new ListePlageHoraire();
 
 	public void setListePlageHoraire(ListePlageHoraire listePlageHoraire) {
 		this.listePlageHoraire = listePlageHoraire;
 	}
 
-	/*
-	 * À compléter
-	 */
-	
 	public boolean ajouterRendezVous(RendezVous rdvAjout, Date date) {
 		
 		if (date.getHours() < 8 || date.getHours() > 20) {
@@ -163,7 +159,7 @@ public class Calendrier {
 		return false;
 	}
 
-	public void obtenirCalendirerDocteur(Docteur Docteur) {
+	public ListePlageHoraire obtenirCalendirerDocteur(Docteur Docteur) {
 
 		Calendrier calendrierDuDocteur = new Calendrier();
 		ListePlageHoraire nouvelleListe = calendrierDuDocteur.listePlageHoraire;
@@ -188,10 +184,10 @@ public class Calendrier {
 
 		}
 		calendrierDuDocteur.listePlageHoraire = nouvelleListe;
-
+		return calendrierDuDocteur.listePlageHoraire;
 	}
 
-	public void obtenirCalendirerInfirmier(Infirmier Infirmier) {
+	public ListePlageHoraire obtenirCalendirerInfirmier(Infirmier Infirmier) {
 
 		Calendrier calendrierInfirmier = new Calendrier();
 		ListePlageHoraire nouvelleListe = calendrierInfirmier.listePlageHoraire;
@@ -216,6 +212,8 @@ public class Calendrier {
 
 		}
 		calendrierInfirmier.listePlageHoraire = nouvelleListe;
+		
+		return calendrierInfirmier.listePlageHoraire;
 
 	}
 
