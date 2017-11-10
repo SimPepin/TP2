@@ -10,7 +10,7 @@ public class Clinique {
 
 	Calendrier calendrier;
 
-	public boolean ajouterDoctuer(Docteur d) {
+	public boolean ajouterDocteur(Docteur d) {
 		boolean contain = docteur.contains(d); // Retourne vrai si "d" dans vecteur
 		boolean ajoute = false;
 

@@ -3,14 +3,14 @@ import java.util.Date;
 
 public class Calendrier {
 
-	public  ListePlageHoraire listePlageHoraire = new ListePlageHoraire();
+	public ListePlageHoraire listePlageHoraire = new ListePlageHoraire();
 
 	public void setListePlageHoraire(ListePlageHoraire listePlageHoraire) {
 		this.listePlageHoraire = listePlageHoraire;
 	}
 
 	public boolean ajouterRendezVous(RendezVous rdvAjout, Date date) {
-		
+
 		if (date.getHours() < 8 || date.getHours() > 20) {
 
 			return false;
@@ -18,22 +18,20 @@ public class Calendrier {
 		if (date.getMinutes() % 30 != 0) {
 			return false;
 		}
-		
-		
+
 		for (int i = 0; i < obtenirPlageHoraire(date).listeRendezVous.size(); i++) {
 			if (obtenirPlageHoraire(date).listeRendezVous.get(i).getDocteur() != rdvAjout.getDocteur()
 					&& obtenirPlageHoraire(date).listeRendezVous.get(i).getInfirmier() != rdvAjout.getInfirmier()) {
-				
+
 				obtenirPlageHoraire(date).listeRendezVous.add(rdvAjout);
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
 
 		PlageHoraire plageExistPas = new PlageHoraire(date);
-		
+
 		plageExistPas.add(rdvAjout);
 		listePlageHoraire.ajoutDansListe(plageExistPas);
 		return true;
@@ -44,7 +42,7 @@ public class Calendrier {
 	 * À compléter
 	 */
 	private PlageHoraire obtenirPlageHoraire(Date date) {
-		
+
 		Maillon unePlageHoraire = listePlageHoraire.getTete();
 		while (unePlageHoraire != null) {
 			if (unePlageHoraire.getUneDate().getDate().equals(date)) {
@@ -212,7 +210,7 @@ public class Calendrier {
 
 		}
 		calendrierInfirmier.listePlageHoraire = nouvelleListe;
-		
+
 		return calendrierInfirmier.listePlageHoraire;
 
 	}

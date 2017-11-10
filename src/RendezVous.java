@@ -33,8 +33,9 @@ public class RendezVous {
 
 	@Override
 	public String toString() {
-		return "RendezVous [p=" + p + ", d=" + d + ", i=" + i + "]";
+		return p.toString() + d.toString() + i.toString();
 	}
+
 	
 	
 }

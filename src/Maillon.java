@@ -31,10 +31,9 @@ public class Maillon {
 	}
 
 	@Override
+
 	public String toString() {
-		return "Maillon [uneDate=" + uneDate + ", next=" + next + "]";
+		return " " + uneDate + next;
 	}
-	
-	
-	
+
 }

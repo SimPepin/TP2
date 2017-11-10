@@ -68,8 +68,8 @@ public class Patient {
 
 	@Override
 	public String toString() {
-		return " Prenom " + iD.getPrenom() + " Nom " + iD.getNom() + " numéro d'assurance sociale "
-				+ numAssuranceSocial;
+		return " [Patient: " + iD.getPrenom() + " " + iD.getNom() + ", "
+				+ numAssuranceSocial +"] ";
 	}
 
 }

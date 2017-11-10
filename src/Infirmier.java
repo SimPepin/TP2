@@ -52,11 +52,6 @@ public class Infirmier {
 	}
 
 	@Override
-	public String toString() {
-		return "Infirmier [iD=" + iD + ", disponible=" + disponible + "]";
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -82,5 +77,12 @@ public class Infirmier {
 		Infirmier copieInfirmier = new Infirmier(copieID, copieDisponibilite);
 		return copieInfirmier;
 
+	}
+
+	@Override
+
+	public String toString() {
+		return " [Infirmier " + this.iD.getNom() + " " + this.iD.getPrenom() + ", disponibilite = " + this.disponible
+				+ "] ";
 	}
 }

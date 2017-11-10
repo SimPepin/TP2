@@ -3,15 +3,15 @@ public class ListePlageHoraire {
 
 	private Maillon tete;
 	private Maillon next;
+
 	public boolean listeVide() {
 		return tete == null;
 	}
-	
+
 	public ListePlageHoraire() {
 		this.tete = tete;
 		this.next = next;
 	}
-	
 
 	public Maillon getTete() {
 		return tete;
@@ -81,16 +81,16 @@ public class ListePlageHoraire {
 	}
 
 	// Affiche la première plage horaire dans la liste.
-	public PlageHoraire SortirPremierePlage() throws Exception{
+	public PlageHoraire SortirPremierePlage() throws Exception {
 		Maillon premierMaillon = tete;
 		tete = tete.getNext();
 		return premierMaillon.getUneDate();
 	}
 
 	@Override
+
 	public String toString() {
-		return "ListePlageHoraire [tete=" + tete + "]";
+		return "Calendrier:\n" + this.tete;
 	}
-	
-	
+
 }

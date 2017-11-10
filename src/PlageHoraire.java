@@ -59,7 +59,8 @@ public class PlageHoraire {
 	 */
 	@Override
 	public String toString() {
-		return "PlageHoraire [dateRendezVous=" + dateRendezVous + ", listeRendezVous=" + listeRendezVous + "] ";
+		return "Rendez Vous à " + dateRendezVous.getDay() +"/" +dateRendezVous.getMonth() +"/" +dateRendezVous.getYear() + " " +dateRendezVous.getHours() + ":" +dateRendezVous.getMinutes() + "\n" 
+		+ listeRendezVous.toString() +"\n";
 	};
 
 }

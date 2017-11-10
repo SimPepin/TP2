@@ -32,7 +32,7 @@ public class Docteur {
 
 	@Override
 	public String toString() {
-		return "Docteur [numeroDepartement=" + numeroDepartement + ", iD=" + iD + "]";
+		return " [Dr. " +this.iD.getNom() +" " +this.iD.getPrenom() + " du departement " + this.numeroDepartement+"] ";
 	}
 	
 	
