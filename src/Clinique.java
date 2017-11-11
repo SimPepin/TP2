@@ -7,8 +7,9 @@ public class Clinique {
 	Vector<Docteur> docteur = new Vector<Docteur>();
 	Vector<Infirmier> infirmier = new Vector<Infirmier>();
 	Vector<Patient> patient = new Vector<Patient>();
-
 	Calendrier calendrier;
+
+	public Date date = new Date(117, 05, 03, 8, 00);
 
 	public boolean ajouterDocteur(Docteur d) {
 		boolean contain = docteur.contains(d); // Retourne vrai si "d" dans vecteur
@@ -68,18 +69,19 @@ public class Clinique {
 	}
 
 	public void rendezVousPatient(Patient p) {
-		int annee = 117;
-		int mois = 1;
-		int jours = 1;
-		int heures = 8;
-		int minutes = 0;
-		Date date = new Date(annee, mois, jours, heures, minutes); // 2017, 1, 1, 8, 00
+
+		int annee = date.getYear();
+		int mois = date.getMonth();
+		int jours = date.getDay();
+		int heures = date.getHours();
+		int minutes = date.getMinutes();
 
 		for (int x = 0; x < docteur.size(); x++) { // Parcours tous les docteurs
 			for (int y = 0; y < infirmier.size(); y++) { // Parcours tous les infirmiers
 				RendezVous itineraire = new RendezVous(p, docteur.get(x), infirmier.get(y)); // Creer un rdv
-
-				while (calendrier.ajouterRendezVous(itineraire, date) == false) { // Tente d'ajouter un rendez vous
+				// calendrier.ajouterRendezVous(itineraire, date);
+				while (calendrier.ajouterRendezVous(itineraire, date)) { // Tente d'ajouter un rendez
+																			// vous
 
 					minutes = minutes + 30;
 					if (minutes == 60) {
@@ -95,6 +97,11 @@ public class Clinique {
 					if (jours == 30) {
 						jours = 0;
 						mois++;
+					}
+
+					if (mois == 12) {
+						mois = 0;
+						annee++;
 					}
 
 				}

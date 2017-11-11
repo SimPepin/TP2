@@ -12,10 +12,12 @@ public class Calendrier {
 	public boolean ajouterRendezVous(RendezVous rdvAjout, Date date) {
 
 		if (date.getHours() < 8 || date.getHours() > 20) {
-
+			System.out.println("Le rendez-vous doit être entre les heures d'ouvertures \n" + "de 8h à 20h");
 			return false;
 		}
 		if (date.getMinutes() % 30 != 0) {
+			System.out.println("Les rendez-vous doivent sont aux 30 minutes \n"
+					+ "les plages disponibles sont 8:00 , 8:30 , 9:00 , 9:30 , etc..");
 			return false;
 		}
 
@@ -26,6 +28,8 @@ public class Calendrier {
 				obtenirPlageHoraire(date).listeRendezVous.add(rdvAjout);
 				return true;
 			} else {
+				System.out.println(
+						"Le rendez-vous n'a pas pu être ajouté, car le médecin ou l'infirmier à déjà un rendez-vous a cette date!");
 				return false;
 			}
 		}
@@ -153,7 +157,7 @@ public class Calendrier {
 			unePlageHoraire = unePlageHoraire.getNext();
 
 		}
-		System.out.println("Ce rendez-vous ne peut pas être annulé, car il n'existe pas");
+		System.out.println("Le rendez-vous que vous tentez d'annuler n'existe pas");
 		return false;
 	}
 
@@ -215,4 +219,7 @@ public class Calendrier {
 
 	}
 
+	public void afficherCalendrierComplet() {
+
+	}
 }
