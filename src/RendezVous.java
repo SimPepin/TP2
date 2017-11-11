@@ -30,6 +30,10 @@ public class RendezVous {
 	public void setDocteur(Docteur e) {
 		this.d = e;
 	}
+	
+	public boolean comparerRendezVous(RendezVous rdv) {
+		return this.d.equals(rdv.getDocteur()) && this.p.equals(rdv.getPatient()) && this.i.equals(rdv.getInfirmier());
+	}
 
 	@Override
 	public String toString() {

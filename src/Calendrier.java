@@ -3,10 +3,10 @@ import java.util.Date;
 
 public class Calendrier {
 
-	public ListePlageHoraire listePlageHoraire = new ListePlageHoraire();
+	private ListePlageHoraire listePlageHoraire = new ListePlageHoraire();
 
-	public void setListePlageHoraire(ListePlageHoraire listePlageHoraire) {
-		this.listePlageHoraire = listePlageHoraire;
+	public ListePlageHoraire getListePlageHoraire() {
+		return listePlageHoraire;
 	}
 
 	public boolean ajouterRendezVous(RendezVous rdvAjout, Date date) {
@@ -21,11 +21,11 @@ public class Calendrier {
 			return false;
 		}
 
-		for (int i = 0; i < obtenirPlageHoraire(date).listeRendezVous.size(); i++) {
-			if (obtenirPlageHoraire(date).listeRendezVous.get(i).getDocteur() != rdvAjout.getDocteur()
-					&& obtenirPlageHoraire(date).listeRendezVous.get(i).getInfirmier() != rdvAjout.getInfirmier()) {
+		for (int i = 0; i < obtenirPlageHoraire(date).obtenirNbRendezVous(); i++) {
+			if (obtenirPlageHoraire(date).obtenirDateRdvIndex(i).getDocteur() != rdvAjout.getDocteur()
+					&& obtenirPlageHoraire(date).obtenirDateRdvIndex(i).getInfirmier() != rdvAjout.getInfirmier()) {
 
-				obtenirPlageHoraire(date).listeRendezVous.add(rdvAjout);
+				obtenirPlageHoraire(date).addRendezVous(rdvAjout);
 				return true;
 			} else {
 				System.out.println(
@@ -36,21 +36,18 @@ public class Calendrier {
 
 		PlageHoraire plageExistPas = new PlageHoraire(date);
 
-		plageExistPas.add(rdvAjout);
+		plageExistPas.addRendezVous(rdvAjout);
 		listePlageHoraire.ajoutDansListe(plageExistPas);
 		return true;
 
 	}
 
-	/*
-	 * À compléter
-	 */
 	private PlageHoraire obtenirPlageHoraire(Date date) {
 
 		Maillon unePlageHoraire = listePlageHoraire.getTete();
 		while (unePlageHoraire != null) {
-			if (unePlageHoraire.getUneDate().getDate().equals(date)) {
-				PlageHoraire plage = unePlageHoraire.getUneDate();
+			if (unePlageHoraire.getPlageHoraire().getDate().equals(date)) {
+				PlageHoraire plage = unePlageHoraire.getPlageHoraire();
 				return plage;
 			}
 			unePlageHoraire = unePlageHoraire.getNext();
@@ -65,10 +62,10 @@ public class Calendrier {
 
 		while (unePlageHoraire != null && trouve != true) {
 
-			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
-				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getPatient() == unPatient) {
+			for (int i = 0; i < unePlageHoraire.getPlageHoraire().obtenirNbRendezVous(); i++) {
+				if (unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i).getPatient() == unPatient) {
 					trouve = true;
-					return unePlageHoraire.getUneDate().listeRendezVous.get(i);
+					return unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i);
 				}
 			}
 			unePlageHoraire = unePlageHoraire.getNext();
@@ -84,10 +81,10 @@ public class Calendrier {
 
 		while (unePlageHoraire != null && trouve != true) {
 
-			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
-				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getInfirmier() == unInfirmier) {
+			for (int i = 0; i < unePlageHoraire.getPlageHoraire().obtenirNbRendezVous(); i++) {
+				if (unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i).getInfirmier() == unInfirmier) {
 					trouve = true;
-					return unePlageHoraire.getUneDate().listeRendezVous.get(i);
+					return unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i);
 				}
 			}
 
@@ -105,10 +102,10 @@ public class Calendrier {
 
 		while (unePlageHoraire != null && trouve != true) {
 
-			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
-				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getDocteur() == unDocteur) {
+			for (int i = 0; i < unePlageHoraire.getPlageHoraire().obtenirNbRendezVous(); i++) {
+				if (unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i).getDocteur() == unDocteur) {
 					trouve = true;
-					return unePlageHoraire.getUneDate().listeRendezVous.get(i);
+					return unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i);
 				}
 			}
 
@@ -123,28 +120,36 @@ public class Calendrier {
 	// Affiche comme la tête d'une file.
 	public PlageHoraire obtenirProchainePLageHoraire() {
 		try {
-			return listePlageHoraire.SortirPremierePlage();
+			return listePlageHoraire.sortirTeteListe();
 		} catch (Exception e) {
 			System.out.println("Le calendrier ne contient pas encore de plage horaire");
 		}
 		return null;
 	}
 
-	public boolean annulerRendezVous(RendezVous rdvAnnule) {
+	public Boolean plageHoraireExiste(Date date) {
+		Maillon unePlageHoraire = listePlageHoraire.getTete();
 
+		while (unePlageHoraire != null) {
+			if (unePlageHoraire.getPlageHoraire().getDate().compareTo(date) == 0) {
+				return true;
+			}
+			unePlageHoraire = unePlageHoraire.getNext();
+		}
+		return false;
+	}
+
+	public boolean annulerRendezVous(RendezVous rdvAnnule) {
 		Maillon unePlageHoraire = listePlageHoraire.getTete();
 
 		while (unePlageHoraire != null) {
 
-			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
-				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getDocteur() == rdvAnnule.getDocteur()
-						&& unePlageHoraire.getUneDate().listeRendezVous.get(i).getPatient() == rdvAnnule.getPatient()
-						&& unePlageHoraire.getUneDate().listeRendezVous.get(i).getInfirmier() == rdvAnnule
-								.getInfirmier()) {
-					unePlageHoraire.getUneDate().listeRendezVous.remove(i);
-					if (unePlageHoraire.getUneDate().listeRendezVous.isEmpty()) {
+			for (int i = 0; i < unePlageHoraire.getPlageHoraire().obtenirNbRendezVous(); i++) {
+				if (unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i).comparerRendezVous(rdvAnnule)) {
+					unePlageHoraire.getPlageHoraire().retirerRendezVousAIndex(i);
+					if (unePlageHoraire.getPlageHoraire().plageEstVide()) {
 						try {
-							listePlageHoraire.retirerDeLaListe(unePlageHoraire.getUneDate());
+							listePlageHoraire.retirerDeLaListe(unePlageHoraire.getPlageHoraire());
 						} catch (Exception e) {
 							System.out.println("Le calendrier ne contient pas encore de plage horaire");
 						}
@@ -157,7 +162,7 @@ public class Calendrier {
 			unePlageHoraire = unePlageHoraire.getNext();
 
 		}
-		System.out.println("Le rendez-vous que vous tentez d'annuler n'existe pas");
+		
 		return false;
 	}
 
@@ -170,13 +175,13 @@ public class Calendrier {
 
 		while (unePlageHoraire != null) {
 
-			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
-				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getDocteur() == Docteur) {
+			for (int i = 0; i < unePlageHoraire.getPlageHoraire().obtenirNbRendezVous(); i++) {
+				if (unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i).getDocteur() == Docteur) {
 
-					PlageHoraire nvPlageHoraire = new PlageHoraire(unePlageHoraire.getUneDate().dateRendezVous);
-					RendezVous rdvNvCalendrier = unePlageHoraire.getUneDate().listeRendezVous.get(i);
+					PlageHoraire nvPlageHoraire = new PlageHoraire(unePlageHoraire.getPlageHoraire().getDate());
+					RendezVous rdvNvCalendrier = unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i);
 
-					nvPlageHoraire.add(rdvNvCalendrier);
+					nvPlageHoraire.addRendezVous(rdvNvCalendrier);
 					nouvelleListe.ajoutDansListe(nvPlageHoraire);
 
 				}
@@ -198,13 +203,13 @@ public class Calendrier {
 
 		while (unePlageHoraire != null) {
 
-			for (int i = 0; i < unePlageHoraire.getUneDate().listeRendezVous.size(); i++) {
-				if (unePlageHoraire.getUneDate().listeRendezVous.get(i).getInfirmier() == Infirmier) {
+			for (int i = 0; i < unePlageHoraire.getPlageHoraire().obtenirNbRendezVous(); i++) {
+				if (unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i).getInfirmier() == Infirmier) {
 
-					PlageHoraire nvPlageHoraire = new PlageHoraire(unePlageHoraire.getUneDate().dateRendezVous);
-					RendezVous rdvNvCalendrier = unePlageHoraire.getUneDate().listeRendezVous.get(i);
+					PlageHoraire nvPlageHoraire = new PlageHoraire(unePlageHoraire.getPlageHoraire().getDate());
+					RendezVous rdvNvCalendrier = unePlageHoraire.getPlageHoraire().obtenirDateRdvIndex(i);
 
-					nvPlageHoraire.add(rdvNvCalendrier);
+					nvPlageHoraire.addRendezVous(rdvNvCalendrier);
 					nouvelleListe.ajoutDansListe(nvPlageHoraire);
 
 				}
@@ -219,7 +224,4 @@ public class Calendrier {
 
 	}
 
-	public void afficherCalendrierComplet() {
-
-	}
 }

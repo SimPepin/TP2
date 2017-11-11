@@ -29,28 +29,32 @@ public class Identification {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
+	@Override
 	public boolean equals(Object obj) {
 
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
+		if (obj == null || this == null) {
+			return false;
+		}
+		
+		if (!(obj instanceof Identification)) {
+			 return false;
+		}
+		Identification objID = (Identification) obj;
+
+		if (objID.getNom() == null || this.nom == null) {
 			return false;
 		}
 
-		Identification objID = (Identification) obj;
+		if (objID.getPrenom() == null || this.prenom == null) {
 
-		if (objID.getNom() == null) {
-			if (this.nom == null) {
-				return false;
-			}
+			return false;
 		}
-		
-		if(objID.getPrenom() == null) {
-			if(this.prenom == null) {
-				return false;
-			}
+
+		if (objID.getNom() != this.nom || objID.getPrenom() != this.prenom) {
+			return false;
 		}
 		return true;
 	}
@@ -64,6 +68,3 @@ public class Identification {
 	}
 
 }
-
-
-

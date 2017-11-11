@@ -9,8 +9,7 @@ public class ListePlageHoraire {
 	}
 
 	public ListePlageHoraire() {
-		this.tete = tete;
-		this.next = next;
+
 	}
 
 	public Maillon getTete() {
@@ -41,13 +40,13 @@ public class ListePlageHoraire {
 			tete = new Maillon(nouvelleDate);
 		}
 		// À vérifier, vraiment pas certain de mon affaire.
-		else if (tete.getUneDate().dateRendezVous.after(nouvelleDate.getDate())) {
+		else if (tete.getPlageHoraire().getDate().after(nouvelleDate.getDate())) {
 			tete = new Maillon(nouvelleDate, tete);
 		} else {
 			Maillon tmpPrecedent = tete;
 			Maillon tmpSuivant = tete.getNext();
 
-			while (tmpSuivant != null && tmpSuivant.getUneDate().dateRendezVous.before(nouvelleDate.getDate())) {
+			while (tmpSuivant != null && tmpSuivant.getPlageHoraire().getDate().before(nouvelleDate.getDate())) {
 				tmpPrecedent = tmpSuivant;
 				tmpSuivant = tmpSuivant.getNext();
 			}
@@ -62,7 +61,7 @@ public class ListePlageHoraire {
 			return;
 		}
 		// Dans le cas ou la date à retirer serait la première date, dans la liste.
-		else if (tete.getUneDate().dateRendezVous == dateARetirer.getDate()) {
+		else if (tete.getPlageHoraire().getDate() == dateARetirer.getDate()) {
 			tete = tete.getNext();
 		}
 
@@ -70,22 +69,23 @@ public class ListePlageHoraire {
 			Maillon maillonPrécédent = null;
 			Maillon tmpSuivant = tete;
 
-			while (tmpSuivant != null && tmpSuivant.getUneDate().dateRendezVous.before(dateARetirer.getDate())) {
+			while (tmpSuivant != null && tmpSuivant.getPlageHoraire().getDate().before(dateARetirer.getDate())) {
 				maillonPrécédent = tmpSuivant;
 				tmpSuivant = tmpSuivant.getNext();
 			}
-			if (tmpSuivant != null && tmpSuivant.getUneDate().dateRendezVous == dateARetirer.getDate()) {
+			if (tmpSuivant != null && tmpSuivant.getPlageHoraire().getDate() == dateARetirer.getDate()) {
 				maillonPrécédent.setNext(tmpSuivant.getNext());
 			}
 		}
 	}
 
 	// Affiche la première plage horaire dans la liste.
-	public PlageHoraire SortirPremierePlage() throws Exception {
+	public PlageHoraire sortirTeteListe() throws Exception {
 		Maillon premierMaillon = tete;
 		tete = tete.getNext();
-		return premierMaillon.getUneDate();
+		return premierMaillon.getPlageHoraire();
 	}
+	
 
 	@Override
 

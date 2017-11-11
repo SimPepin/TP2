@@ -29,6 +29,28 @@ public class Docteur {
 	public Identification getid() {
 		return iD;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) {
+			return true;
+		}
+		if(obj == null || this == null) {
+			return false;
+		}
+		if(!(obj instanceof Docteur)) {
+			return false;
+		}
+		Docteur objDocteur = (Docteur) obj;
+		
+		if(objDocteur.getid() == null || this.iD == null) {
+			return false;
+		}
+		
+		if(objDocteur.getNumeroDepartement() != this.numeroDepartement || !this.iD.equals(objDocteur.getid())) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

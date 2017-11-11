@@ -2,10 +2,7 @@
 public class Infirmier {
 
 	private Identification iD;
-	boolean disponible = true;
-
-	public Infirmier() {
-	}
+	private boolean disponible = true;
 
 	public Infirmier(String prenom, String nom) {
 
@@ -53,20 +50,24 @@ public class Infirmier {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null || this == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof Infirmier)) {
 			return false;
-		Infirmier other = (Infirmier) obj;
-		if (disponible != other.disponible)
+		}
+		Infirmier objInfirmier = (Infirmier) obj;
+		
+		if(objInfirmier.isDisponible() != this.isDisponible() || !this.iD.equals(objInfirmier.getiD())){
 			return false;
-		if (iD == null) {
-			if (other.iD != null)
-				return false;
-		} else if (!iD.equals(other.iD))
+		}
+		
+		if(objInfirmier.getiD() == null || this.iD == null) {
 			return false;
+		}
 		return true;
 	}
 

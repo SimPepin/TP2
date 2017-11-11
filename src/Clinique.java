@@ -1,22 +1,31 @@
 
 import java.util.Vector;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Clinique {
 
-	Vector<Docteur> docteur = new Vector<Docteur>();
-	Vector<Infirmier> infirmier = new Vector<Infirmier>();
-	Vector<Patient> patient = new Vector<Patient>();
-	Calendrier calendrier;
+	private Vector<Docteur> docteurs;
+	private Vector<Infirmier> infirmiers;
+	private Vector<Patient> patients;
+	private Calendrier calendrier;
 
-	public Date date = new Date(117, 05, 03, 8, 00);
+	public Clinique() {
+
+		this.docteurs = new Vector<Docteur>();
+		this.infirmiers = new Vector<Infirmier>();
+		this.patients = new Vector<Patient>();
+		this.calendrier = new Calendrier();
+	}
+
+	// private Date date = new Date(117, 05, 03, 8, 00);
 
 	public boolean ajouterDocteur(Docteur d) {
-		boolean contain = docteur.contains(d); // Retourne vrai si "d" dans vecteur
+		boolean contain = docteurs.contains(d); // Retourne vrai si "d" dans vecteur
 		boolean ajoute = false;
 
 		if (contain == false) { // Si pas dans vecteur, ajoute "d"
-			docteur.add(d);
+			docteurs.add(d);
 			ajoute = true;
 		}
 
@@ -24,11 +33,11 @@ public class Clinique {
 	}
 
 	public boolean ajouterInfirmier(Infirmier i) {
-		boolean contain = infirmier.contains(i);
+		boolean contain = infirmiers.contains(i);
 		boolean ajoute = false;
 
 		if (contain == false) {
-			infirmier.add(i);
+			infirmiers.add(i);
 			ajoute = true;
 		}
 
@@ -36,11 +45,11 @@ public class Clinique {
 	}
 
 	public boolean ajouterPatient(Patient p) {
-		boolean contain = patient.contains(p);
+		boolean contain = patients.contains(p);
 		boolean ajoute = false;
 
 		if (contain == false) {
-			patient.add(p);
+			patients.add(p);
 			ajoute = true;
 		}
 
@@ -48,67 +57,72 @@ public class Clinique {
 	}
 
 	public Docteur getDocteur(int indice) {
-		return docteur.get(indice);
+		return docteurs.get(indice);
 	}
 
 	public Infirmier getInfirmier(int indice) {
-		return infirmier.get(indice);
+		return infirmiers.get(indice);
 	}
 
 	public Patient getPatient(int indice) {
-		return patient.get(indice);
+		return patients.get(indice);
 	}
 
-	public ListePlageHoraire getCalendrier() {
+	public Calendrier getCalendrier() {
 
-		return calendrier.listePlageHoraire;
+		return this.calendrier;
 	}
 
-	public void setCalendrier(Calendrier c) {
-		this.calendrier = c;
+	public int getNbDocteurs() {
+		return docteurs.size();
 	}
 
-	public void rendezVousPatient(Patient p) {
+	public int getNbInfirmiers() {
+		return infirmiers.size();
+	}
 
-		int annee = date.getYear();
-		int mois = date.getMonth();
-		int jours = date.getDay();
-		int heures = date.getHours();
-		int minutes = date.getMinutes();
+	public int getNbPatients() {
+		return patients.size();
+	}
 
-		for (int x = 0; x < docteur.size(); x++) { // Parcours tous les docteurs
-			for (int y = 0; y < infirmier.size(); y++) { // Parcours tous les infirmiers
-				RendezVous itineraire = new RendezVous(p, docteur.get(x), infirmier.get(y)); // Creer un rdv
-				// calendrier.ajouterRendezVous(itineraire, date);
-				while (calendrier.ajouterRendezVous(itineraire, date)) { // Tente d'ajouter un rendez
-																			// vous
+	public boolean verifierRendezVousAPlageHoraire(Date date) {
+		return this.calendrier.plageHoraireExiste(date);
 
-					minutes = minutes + 30;
-					if (minutes == 60) {
-						minutes = 0;
-						heures++;
+	}
+
+	public RendezVous rendezVousPatient(Patient p) throws Exception {
+
+		Date dateDepart = new Date();
+		// la journée commence a 8h.
+		dateDepart.setMinutes(0);
+		dateDepart.setHours(8);
+		boolean journeeParcourue = false;
+
+		for (int i = 0; i < docteurs.size(); i++) {
+			for (int j = 0; j < infirmiers.size(); j++) {
+				RendezVous rdv = new RendezVous(p, docteurs.get(i), infirmiers.get(j));
+
+				while (!journeeParcourue) {
+					if (calendrier.ajouterRendezVous(rdv, dateDepart)) {
+						return rdv;
 					}
+					if (dateDepart.getMinutes() == 30) {
+						if (dateDepart.getHours() == 19) {
+							journeeParcourue = true;
+							throw new Exception("Il n'y a pas de rendez-vous disponible");
+						} else {
+							dateDepart.setHours(dateDepart.getHours() + 1);
+							dateDepart.setMinutes(0);
+						}
 
-					if (heures == 20) {
-						heures = 8;
-						jours++;
-					}
-
-					if (jours == 30) {
-						jours = 0;
-						mois++;
-					}
-
-					if (mois == 12) {
-						mois = 0;
-						annee++;
+					} else {
+						dateDepart.setMinutes(30);
 					}
 
 				}
 
 			}
 		}
-
+		throw new Exception("Il n'y a pas de rendez-vous disponible aujourd'hui");
 	}
-
 }

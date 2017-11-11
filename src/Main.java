@@ -15,19 +15,20 @@ import jdk.nashorn.internal.ir.LexicalContext;
 
 public class Main {
 
-	public static Calendrier leCalendrier = new Calendrier();
-	public static Clinique laClinique = new Clinique();
-	public static Scanner entrerUsager = new Scanner(System.in);
+	private static Clinique clinique;
+	private static Scanner entrerUsager;
 
-	public static int valeurEntre = 0;
-	public static String nom;
-	public static String prenom;
+	private static String nom;
+	private static String prenom;
 
 	public static void main(String[] args) {
 
-		laClinique.setCalendrier(leCalendrier);
-		System.out.println(leCalendrier.toString());
-		System.out.println(laClinique.calendrier.toString());
+		clinique = new Clinique();
+		entrerUsager = new Scanner(System.in);
+
+		// clinique.setCalendrier(leCalendrier);
+		// System.out.println(leCalendrier.toString());
+		// System.out.println(clinique.calendrier.toString());
 		Identification id = new Identification("une", "deux");
 		Identification id2 = new Identification("trois", "quatre");
 		Identification id3 = new Identification("yolo", "swag");
@@ -43,33 +44,29 @@ public class Main {
 		RendezVous rdv = new RendezVous(p, d, i);
 		RendezVous rdv2 = new RendezVous(p, d, i);
 		RendezVous rdv3 = new RendezVous(l, d, i);
-		// leCalendrier.ajouterRendezVous(rdv, new Date(117,05,03,7,15,12) );
-
-		boolean result = leCalendrier.ajouterRendezVous(rdv, new Date(117, 05, 03, 7, 15, 12));
 
 		// System.out.println(result);
 
-		result = leCalendrier.ajouterRendezVous(rdv, new Date(117, 05, 03, 8, 00));
+		
 		// System.out.println(result);
-		result = leCalendrier.ajouterRendezVous(rdv, new Date(117, 05, 03, 8, 00));
+		//clinique.getCalendrier().ajouterRendezVous(rdv, new Date(117, 05, 13, 8, 00));
 		// System.out.println(result);
-		result = leCalendrier.ajouterRendezVous(rdv, new Date(117, 05, 03, 9, 30));
-		result = leCalendrier.ajouterRendezVous(rdv, new Date(117, 05, 03, 10, 30));
-		laClinique.setCalendrier(leCalendrier);
+	
+		// clinique.setCalendrier(leCalendrier);
 
-		laClinique.ajouterDocteur(d);
-		laClinique.ajouterPatient(o);
-		laClinique.ajouterDocteur(k);
-		laClinique.ajouterInfirmier(i);
-		laClinique.ajouterInfirmier(j);
-		laClinique.ajouterPatient(p);
-		laClinique.ajouterPatient(n);
+		clinique.ajouterDocteur(d);
+		clinique.ajouterPatient(o);
+		clinique.ajouterDocteur(k);
+		clinique.ajouterInfirmier(i);
+		clinique.ajouterInfirmier(j);
+		clinique.ajouterPatient(p);
+		clinique.ajouterPatient(n);
 
 		// System.out.print(laClinique.calendrier.listePlageHoraire.toString());
 		// System.out.println(leCalendrier.listePlageHoraire.toString());
 
 		// laClinique.rendezVousPatient(o);
-		leCalendrier.ajouterRendezVous(rdv3, new Date(117, 05, 03, 11, 00));
+	
 
 		// laClinique.rendezVousPatient(o);
 		// System.out.print(laClinique.calendrier.listePlageHoraire.toString());
@@ -111,14 +108,16 @@ public class Main {
 			sortirPremierePlage();
 			break;
 		case 10:
-
+			afficherCalendrierComplet();
 			break;
 		case 11:
+			afficherCalendrirerCompletDoc();
 			break;
 		case 12:
+			afficherCalendrierCompletInf();
 			break;
 		case 13:
-
+			annulerRDVPatient();
 			break;
 		case 14:
 			quitter();
@@ -130,6 +129,7 @@ public class Main {
 	}
 
 	public static void menu() {
+		int valeurEntreMenu = 0;
 		System.out.println("Bienvenue à la clinique \r\n" + "Que voulez-vous faire ? \r\n"
 				+ "1 - Ajouter un docteur\r\n" + "2 - Ajouter un infirmier\r\n" + "3 - Ajouter un patient\r\n"
 				+ "4 - Ajouter un rendez-vous\r\n" + "5 - Trouver un rendez-vous pour un patient\r\n"
@@ -140,10 +140,10 @@ public class Main {
 				+ "11- Afficher le calendrier complet d'un docteur\r\n"
 				+ "12- Afficher le calendrier complet d'un infirmier\r\n" + "13- Annuler un rendez-vous\r\n"
 				+ "14- Quitter");
-		while (valeurEntre != 14) {
+		while (valeurEntreMenu != 14) {
 			System.out.println("-->");
-			valeurEntre = entrerUsager.nextInt();
-			choixUsager(valeurEntre);
+			valeurEntreMenu = entrerUsager.nextInt();
+			choixUsager(valeurEntreMenu);
 		}
 	}
 
@@ -160,7 +160,7 @@ public class Main {
 		Identification id = new Identification(nom, prenom);
 		Docteur nouveauDocteur = new Docteur(id, numDepart);
 
-		laClinique.ajouterDocteur(nouveauDocteur);
+		clinique.ajouterDocteur(nouveauDocteur);
 		System.out.println(" Le nouveau Docteur " + nouveauDocteur.toString() + "à été ajouté");
 	}
 
@@ -173,7 +173,7 @@ public class Main {
 
 		Identification id = new Identification(nom, prenom);
 		Infirmier nouvelInfirmier = new Infirmier(id, true);
-		laClinique.ajouterInfirmier(nouvelInfirmier);
+		clinique.ajouterInfirmier(nouvelInfirmier);
 		System.out.println(" Le nouveau patient " + nouvelInfirmier.toString() + "à été ajouté");
 	}
 
@@ -189,50 +189,17 @@ public class Main {
 		Identification id = new Identification(nom, prenom);
 		Patient nouveauPatient = new Patient(numAssuranceSociale, id);
 
-		laClinique.ajouterPatient(nouveauPatient);
+		clinique.ajouterPatient(nouveauPatient);
 		System.out.println(" Le nouveau patient " + nouveauPatient.toString() + "à été ajouté");
-
+		menu();
 	}
 
 	public static void ajouterRendezVous() {
-		Date dateDeRendezVous = null;
-		int valEntre;
-		int annee;
-		int mois;
-		int jour;
-		int heure;
-		int minute;
-		afficherListeDocteurs();
-		afficherListeInfirmiers();
-		afficherListePatient();
 
-		System.out.println("Veuillez sélectionner un docteur, un infirmier et un patient : \n");
-		System.out.println("Sélectionner le numéro du docteur souhaité, dans la liste : ");
-		valEntre = entrerUsager.nextInt() - 1;
-		Docteur docSelect = laClinique.docteur.elementAt(valeurEntre);
-		System.out.println("Sélectionner le numéro de l'infirmier souhaité, dans la liste : ");
-		valEntre = entrerUsager.nextInt() - 1;
-		Infirmier infSelect = laClinique.infirmier.elementAt(valeurEntre);
-		System.out.println("Sélectionner le numéro du patient dans la liste : ");
-		valeurEntre = entrerUsager.nextInt() - 1;
-		Patient patSelect = laClinique.patient.elementAt(valEntre);
+		RendezVous nouveauRendezVous = creationRendezVous();
+		Date dateDeRendezVous = selectionDate();
 
-		System.out.println("Maintenant entrez la date de votre prochain rendez-vous :\n");
-		System.out.println("Veuillez entrer l'année :");
-		annee = entrerUsager.nextInt() - 1900;
-		System.out.println("Veuillez entrer le mois :");
-		mois = entrerUsager.nextInt();
-		System.out.println("Veuillez entrer le jour :");
-		jour = entrerUsager.nextInt();
-		System.out.println("Veuillez entrer l'heure :");
-		heure = entrerUsager.nextInt();
-		System.out.println("Veuillez finalement entrer les minutes, soit 30 ou 00 : ");
-		minute = entrerUsager.nextInt();
-		dateDeRendezVous = new Date(annee, mois, jour, heure, minute);
-
-		RendezVous nouveauRendezVous = new RendezVous(patSelect, docSelect, infSelect);
-
-		if (leCalendrier.ajouterRendezVous(nouveauRendezVous, dateDeRendezVous)) {
+		if (clinique.getCalendrier().ajouterRendezVous(nouveauRendezVous, dateDeRendezVous)) {
 			System.out.println("Votre rendez-vous a été enregsitré avec succès");
 			System.out.println("Retour au menu");
 			menu();
@@ -241,15 +208,16 @@ public class Main {
 			while (input) {
 
 				System.out.println("Voulez-vous refaire le rendez-vous ? (Y/N)");
-				if (entrerUsager.nextLine().equals("Y") || entrerUsager.nextLine().equals("y")) {
+				String answer = entrerUsager.next();
+				if (answer.compareToIgnoreCase("Y") == 0) {
 					ajouterRendezVous();
 					input = false;
-					// A vérifier avec bruno demain !!!
-				} else if (entrerUsager.nextLine().equals("N") || entrerUsager.nextLine().equals("n")) {
+
+				} else if (answer.compareTo("N") == 0) {
 					menu();
 					input = false;
 				} else {
-					System.out.println("Vous n'avez pas dit oui ou non");
+					System.out.println("Vous n'avez pas entré (Y/N)");
 				}
 			}
 		}
@@ -257,15 +225,26 @@ public class Main {
 	}
 
 	public static void trouverRDVPatient() {
-
+		afficherListePatient();
+		System.out.println("Sélectionner le patient à qui ajouter un rendez-vous : ");
+		int valEntre = entrerUsager.nextInt();
+		Patient patientSelect = clinique.getPatient(valEntre);
+		try {
+			System.out.println(clinique.rendezVousPatient(patientSelect));
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		menu();
 	}
 
 	public static void afficherProchainRdvDoc() {
 		afficherListeDocteurs();
 		System.out.println("Veuillez sélectionner le numéro associé au docteur dans la liste");
 		int valSelect = entrerUsager.nextInt();
-		Docteur docselect = laClinique.docteur.elementAt(valSelect - 1);
-		System.out.println(leCalendrier.obtenirProchainRendezVousDocteur(docselect));
+		Docteur docselect = clinique.getDocteur(valSelect);
+		System.out.println(clinique.getCalendrier().obtenirProchainRendezVousDocteur(docselect));
 
 		menu();
 	}
@@ -274,8 +253,8 @@ public class Main {
 		afficherListeInfirmiers();
 		System.out.println("Veuillez sélectionner le numéro associé à l'infirmier dans la liste");
 		int valSelect = entrerUsager.nextInt();
-		Infirmier infSelect = laClinique.infirmier.elementAt(valSelect - 1);
-		System.out.println(leCalendrier.obtenirProchainRendezVousInfirmier(infSelect));
+		Infirmier infSelect = clinique.getInfirmier(valSelect);
+		System.out.println(clinique.getCalendrier().obtenirProchainRendezVousInfirmier(infSelect));
 
 		menu();
 	}
@@ -284,15 +263,16 @@ public class Main {
 		afficherListePatient();
 		System.out.println("Veuillez sélectionner le numéro associé au patient dans la liste");
 		int valSelect = entrerUsager.nextInt();
-		Patient patSelect = laClinique.patient.elementAt(valSelect - 1);
-		System.out.println(leCalendrier.obtenirProchainRendezVousPatient(patSelect));
+		Patient patSelect = clinique.getPatient(valSelect);
+		System.out.println(clinique.getCalendrier().obtenirProchainRendezVousPatient(patSelect));
 
 		menu();
 	}
 
 	public static void sortirPremierePlage() {
 		try {
-			System.out.println("Le prochain rendez-vous est : " + leCalendrier.listePlageHoraire.SortirPremierePlage());
+			System.out.println(
+					"Le prochain rendez-vous est : " + clinique.getCalendrier().obtenirProchainePLageHoraire());
 		} catch (Exception e) {
 			System.out.println("Le calendrier ne contient pas encore de plage horaire");
 		} finally {
@@ -301,22 +281,43 @@ public class Main {
 	}
 
 	public static void afficherCalendrierComplet() {
-
+		System.out.println(clinique.getCalendrier().getListePlageHoraire().toString());
+		menu();
 	}
 
 	public static void afficherCalendrirerCompletDoc() {
-
+		afficherListeDocteurs();
+		System.out.println("Sélectionner le numéro du docteur dont vous voulez afficher le calendrier : ");
+		int valSelect = entrerUsager.nextInt();
+		Docteur docSelect = clinique.getDocteur(valSelect);
+		System.out.println(clinique.getCalendrier().obtenirCalendirerDocteur(docSelect));
 	}
 
 	public static void afficherCalendrierCompletInf() {
-
+		afficherListeInfirmiers();
+		System.out.println("Sélectionner le numéro de l'infirmier dont vous voulez afficher le calendrier : ");
+		int valSelect = entrerUsager.nextInt();
+		Infirmier infSelect = clinique.getInfirmier(valSelect);
+		System.out.println(clinique.getCalendrier().obtenirCalendirerInfirmier(infSelect));
 	}
 
 	public static void annulerRDVPatient() {
 
 		try {
-			// RendezVous rdvAnnuler = new RendezVous(p, d, i)
-			// leCalendrier.annulerRendezVous();
+			RendezVous rdvAnnuler = creationRendezVous();
+			Date dateSupprime = selectionDate();
+			if (clinique.verifierRendezVousAPlageHoraire(dateSupprime)) {
+				if (clinique.getCalendrier().annulerRendezVous(rdvAnnuler)) {
+					System.out.println("Le rendez-vous à été annulé avec succès");
+				} else {
+					System.out.println("Il n'y a pas de rendez-vous à la date entré");
+					menu();
+				}
+			} else {
+				System.out.println("Il n'y a pas de rendez-vous à la date entré");
+				menu();
+			}
+
 		} catch (Exception e) {
 			System.out.println("Le calendrier ne contient pas encore de plage horaire");
 		} finally {
@@ -325,18 +326,17 @@ public class Main {
 	}
 
 	public static void quitter() {
-		// À terminer avec Bruno !!!!
-		System.out.println("Voulez-vous vraiment quitter ? (Y/N)");
-		String entre = entrerUsager.nextLine();
 
-		while (entre != "Y" || entre != "N" || entre != "n" || entre != "y") {
-			quitter();
-		}
-		if (entre == "Y" || entre == "y") {
+		System.out.println("Voulez-vous vraiment quitter ? (Y/N)");
+		String entre = entrerUsager.next();
+
+		if (entre.compareToIgnoreCase("Y") == 0) {
 			System.out.println("bye bye");
 			System.exit(0);
-		} else {
+		} else if (entre.compareToIgnoreCase("N") == 0) {
 			menu();
+		} else {
+			quitter();
 		}
 
 	}
@@ -344,8 +344,8 @@ public class Main {
 	public static void afficherListeDocteurs() {
 
 		System.out.println("Liste des docteurs de la clinique\n\r");
-		for (int i = 0; i < laClinique.docteur.size(); i++) {
-			System.out.println(i + 1 + ": " + laClinique.docteur.get(i).toString());
+		for (int i = 0; i < clinique.getNbDocteurs(); i++) {
+			System.out.println(i + ": " + clinique.getDocteur(i).toString());
 		}
 		System.out.println("\n");
 	}
@@ -354,8 +354,8 @@ public class Main {
 
 		System.out.println("Liste des infirmiers de la clinique\n\r");
 
-		for (int i = 0; i < laClinique.infirmier.size(); i++) {
-			System.out.println(i + 1 + ":" + laClinique.infirmier.get(i).toString());
+		for (int i = 0; i < clinique.getNbInfirmiers(); i++) {
+			System.out.println(i + ":" + clinique.getInfirmier(i).toString());
 		}
 		System.out.println("\n");
 	}
@@ -363,9 +363,58 @@ public class Main {
 	public static void afficherListePatient() {
 		System.out.println("Liste des patients de la clinique\n\r");
 
-		for (int i = 0; i < laClinique.patient.size(); i++) {
-			System.out.println(i + 1 + ":" + laClinique.patient.get(i).toString());
+		for (int i = 0; i < clinique.getNbPatients(); i++) {
+			System.out.println(i + ":" + clinique.getPatient(i).toString());
 		}
 		System.out.println("\n");
+	}
+
+	private static RendezVous creationRendezVous() {
+		int valEntre;
+		afficherListeDocteurs();
+		afficherListeInfirmiers();
+		afficherListePatient();
+
+		System.out.println("Veuillez sélectionner un docteur, un infirmier et un patient : \n");
+		System.out.println("Sélectionner le numéro du docteur souhaité, dans la liste : ");
+		valEntre = entrerUsager.nextInt();
+		Docteur docSelect = clinique.getDocteur(valEntre);
+		System.out.println("Sélectionner le numéro de l'infirmier souhaité, dans la liste : ");
+		valEntre = entrerUsager.nextInt();
+		Infirmier infSelect = clinique.getInfirmier(valEntre);
+		System.out.println("Sélectionner le numéro du patient dans la liste : ");
+		valEntre = entrerUsager.nextInt();
+		Patient patSelect = clinique.getPatient(valEntre);
+
+		RendezVous nouveauRendezVous = new RendezVous(patSelect, docSelect, infSelect);
+
+		return nouveauRendezVous;
+	}
+
+	private static Date selectionDate() {
+
+		Date dateDeRendezVous;
+
+		int annee;
+		int mois;
+		int jour;
+		int heure;
+		int minute;
+
+		System.out.println("Maintenant entrez la date du rendez-vous souhaite:\n");
+		System.out.println("Veuillez entrer l'année :");
+		// On enleve 1900, car l'horloge de java commence à -1900
+		annee = entrerUsager.nextInt() -1900;
+		System.out.println("Veuillez entrer le mois :");
+		mois = entrerUsager.nextInt();
+		System.out.println("Veuillez entrer le jour :");
+		jour = entrerUsager.nextInt();
+		System.out.println("Veuillez entrer l'heure :");
+		heure = entrerUsager.nextInt();
+		System.out.println("Veuillez finalement entrer les minutes, soit 30 ou 00 : ");
+		minute = entrerUsager.nextInt();
+
+		dateDeRendezVous = new Date(annee, mois, jour, heure, minute);
+		return dateDeRendezVous;
 	}
 }

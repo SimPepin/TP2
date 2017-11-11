@@ -1,25 +1,25 @@
 
 public class Maillon {
-	private PlageHoraire uneDate;
+	private PlageHoraire plageHoraire;
 	private Maillon next;
 
-	public Maillon(PlageHoraire uneDate) {
-		this.uneDate = uneDate;
+	public Maillon(PlageHoraire plageHoraire) {
+		this.plageHoraire = plageHoraire;
 		this.next = null;
 	}
 
 	public Maillon(PlageHoraire uneDate, Maillon next) {
 
-		this.uneDate = uneDate;
+		this.plageHoraire = uneDate;
 		this.next = next;
 	}
 
-	public PlageHoraire getUneDate() {
-		return uneDate;
+	public PlageHoraire getPlageHoraire() {
+		return plageHoraire;
 	}
 
-	public void setUneDate(PlageHoraire uneDate) {
-		this.uneDate = uneDate;
+	public void setPlageHoraire(PlageHoraire plageHoraire) {
+		this.plageHoraire = plageHoraire;
 	}
 
 	public Maillon getNext() {
@@ -33,7 +33,7 @@ public class Maillon {
 	@Override
 
 	public String toString() {
-		return " " + uneDate + next;
+		return " " + plageHoraire + next;
 	}
 
 }

@@ -1,5 +1,4 @@
 
-
 public class Patient {
 	private int numAssuranceSocial;
 	private Identification iD;
@@ -18,6 +17,10 @@ public class Patient {
 		this.numAssuranceSocial = patient.getNumAssuranceSocial();
 	}
 
+	public Patient() {
+
+	}
+
 	public int getNumAssuranceSocial() {
 		return numAssuranceSocial;
 	}
@@ -33,30 +36,27 @@ public class Patient {
 	public void setID(Identification iD) {
 		this.iD = iD;
 	}
-
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
+		if (obj == null || this == null) {
+			return false;
+		}
+
+		if (!(obj instanceof Patient)) {
 			return false;
 		}
 		Patient objPatient = (Patient) obj;
 
-		if (objPatient.getID().getPrenom() == null) {
-			if (this.getID().getPrenom() == null) {
-				return false;
-			}
-
+		if (objPatient.getID() == null || this.iD == null) {
+			return false;
 		}
-		if (objPatient.getID().getNom() == null) {
-			if (this.getID().getNom() == null) {
-				return false;
-			}
+		if (objPatient.getNumAssuranceSocial() != this.numAssuranceSocial || !this.iD.equals(objPatient.getID())) {
+			return false;
 		}
-
 		return true;
-
 	}
 
 	/*
@@ -68,8 +68,7 @@ public class Patient {
 
 	@Override
 	public String toString() {
-		return " [Patient: " + iD.getPrenom() + " " + iD.getNom() + ", "
-				+ numAssuranceSocial +"] ";
+		return " [Patient: " + iD.getPrenom() + " " + iD.getNom() + ", " + numAssuranceSocial + "] ";
 	}
 
 }
