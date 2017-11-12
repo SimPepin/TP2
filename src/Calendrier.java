@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.rmi.UnexpectedException;
 import java.util.Date;
 
-public class Calendrier {
+public class Calendrier implements Serializable {
 
 	private ListePlageHoraire listePlageHoraire = new ListePlageHoraire();
 

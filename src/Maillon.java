@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Maillon {
+public class Maillon implements Serializable{
 	private PlageHoraire plageHoraire;
 	private Maillon next;
 

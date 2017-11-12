@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Infirmier {
+public class Infirmier implements Serializable {
 
 	private Identification iD;
 	private boolean disponible = true;

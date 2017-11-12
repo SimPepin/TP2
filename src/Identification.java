@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Identification {
+public class Identification implements Serializable{
 
 	private String nom;
 	private String prenom;

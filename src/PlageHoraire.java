@@ -1,7 +1,8 @@
 import java.util.Date;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PlageHoraire {
+public class PlageHoraire implements Serializable{
 
 	private Date dateRendezVous;
 	private ArrayList<RendezVous> listeRendezVous;

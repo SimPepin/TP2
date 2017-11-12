@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class RendezVous {
+public class RendezVous implements Serializable{
 
 	private Patient p;
 	private Docteur d;
@@ -21,6 +22,10 @@ public class RendezVous {
 
 	public Infirmier getInfirmier() {
 		return this.i;
+	}
+	
+	public void setInfirmier(Infirmier inf) {
+		this.i = inf;
 	}
 
 	public void setPatient(Patient e) {

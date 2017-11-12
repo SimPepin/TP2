@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Patient {
+public class Patient implements Serializable{
 	private int numAssuranceSocial;
 	private Identification iD;
 

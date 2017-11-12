@@ -1,9 +1,10 @@
 
 import java.util.Vector;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Clinique {
+public class Clinique implements Serializable{
 
 	private Vector<Docteur> docteurs;
 	private Vector<Infirmier> infirmiers;

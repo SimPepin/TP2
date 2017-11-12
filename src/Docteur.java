@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Docteur {
+public class Docteur implements Serializable{
 	
 	private int numeroDepartement;
 	private Identification iD ;
@@ -51,7 +52,11 @@ public class Docteur {
 		}
 		return true;
 	}
-
+	
+	public Docteur cloneDocteur(Docteur docteur) {
+		return new Docteur(docteur.iD,docteur.numeroDepartement);
+	}
+	
 	@Override
 	public String toString() {
 		return " [Dr. " +this.iD.getNom() +" " +this.iD.getPrenom() + " du departement " + this.numeroDepartement+"] ";
