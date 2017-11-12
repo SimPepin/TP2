@@ -1,5 +1,6 @@
 
 import java.io.Serializable;
+
 import java.sql.Time;
 import java.util.Date;
 import java.util.Scanner;
@@ -9,6 +10,12 @@ import javax.sound.midi.SysexMessage;
 import javax.swing.Timer;
 
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
+/**
+ * 
+ * @author Simon Pepin, Sifat Saikat ,Sami Balti
+ *
+ */
 
 public class Main implements Serializable {
 
@@ -21,56 +28,9 @@ public class Main implements Serializable {
 
 	public static void main(String[] args) {
 
-		// clinique = new Clinique();
-		// UtilitaireFichier.sauvegardeClinique(clinique, "bin.ser");
-
 		clinique = UtilitaireFichier.chargeClinique("bin.ser");
-
-		//fichierSauvegarde = new UtilitaireFichier();
 		entrerUsager = new Scanner(System.in);
-
-		// clinique.setCalendrier(leCalendrier);
-		// System.out.println(leCalendrier.toString());
-		// System.out.println(clinique.calendrier.toString());
-		/*
-		 * Identification id = new Identification("une", "deux"); Identification id2 =
-		 * new Identification("trois", "quatre"); Identification id3 = new
-		 * Identification("yolo", "swag"); Patient p = new Patient(123456, id); Patient
-		 * o = new Patient(9786676, id3); Docteur d = new Docteur(id, 1); Infirmier i =
-		 * new Infirmier(id, true); Infirmier j = new Infirmier(id2, true); Docteur k =
-		 * new Docteur(id2, 2); Patient l = new Patient(89898, id2); Patient n = new
-		 * Patient(90978, id3);
-		 * 
-		 * RendezVous rdv = new RendezVous(p, d, i); RendezVous rdv2 = new RendezVous(p,
-		 * d, i); RendezVous rdv3 = new RendezVous(l, d, i);
-		 */
-		// System.out.println(result);
-
-		// System.out.println(result);
-		// clinique.getCalendrier().ajouterRendezVous(rdv, new Date(117, 05, 13, 8,
-		// 00));
-		// System.out.println(result);
-
-		// clinique.setCalendrier(leCalendrier);
-		/*
-		 * clinique.ajouterDocteur(d); clinique.ajouterPatient(o);
-		 * clinique.ajouterDocteur(k); clinique.ajouterInfirmier(i);
-		 * clinique.ajouterInfirmier(j); clinique.ajouterPatient(p);
-		 * clinique.ajouterPatient(n);
-		 */
-		// System.out.print(laClinique.calendrier.listePlageHoraire.toString());
-		// System.out.println(leCalendrier.listePlageHoraire.toString());
-
-		// laClinique.rendezVousPatient(o);
-
-		// laClinique.rendezVousPatient(o);
-		// System.out.print(laClinique.calendrier.listePlageHoraire.toString());
-		// System.out.println(leCalendrier.listePlageHoraire.toString());
-
-		// System.out.println(leCalendrier.listePlageHoraire.toString());
-
 		menu();
-
 	}
 
 	public static void choixUsager(int valeurEntre) {
@@ -239,50 +199,46 @@ public class Main implements Serializable {
 
 	public static void afficherProchainRdvDoc() {
 
-		
 		afficherListeDocteurs();
 		System.out.println("Veuillez selectionner le numero associe au docteur dans la liste");
 
-	
-			try {
-				int valSelect = entrerUsager.nextInt();
-				Docteur docselect = clinique.getDocteur(valSelect);
-				System.out.println(clinique.getCalendrier().obtenirProchainRendezVousDocteur(docselect));
-				
-			} catch (Exception e) {
-				System.out.println("Veuillez choisir parmis les options proposee");
+		try {
+			int valSelect = entrerUsager.nextInt();
+			Docteur docselect = clinique.getDocteur(valSelect);
+			System.out.println(clinique.getCalendrier().obtenirProchainRendezVousDocteur(docselect));
 
-			}finally {
-				afficherProchainRdvDoc();
-			}
+		} catch (Exception e) {
+			System.out.println("Veuillez choisir parmis les options proposee");
+
+		} finally {
+			afficherProchainRdvDoc();
+		}
 
 		menu();
 	}
 
 	public static void afficherProchainRdvInf() {
 
-		
 		afficherListeInfirmiers();
 		System.out.println("Veuillez selectionner le numero associe e l'infirmier dans la liste");
-		
-			try {
-				int valSelect = entrerUsager.nextInt();
-				Infirmier infSelect = clinique.getInfirmier(valSelect);
-				System.out.println(clinique.getCalendrier().obtenirProchainRendezVousInfirmier(infSelect));
-				
-			} catch (Exception e) {
-				System.out.println("Veuillez choisir parmis les options proposee");
 
-			}finally {
-				afficherProchainRdvInf();
-			}
+		try {
+			int valSelect = entrerUsager.nextInt();
+			Infirmier infSelect = clinique.getInfirmier(valSelect);
+			System.out.println(clinique.getCalendrier().obtenirProchainRendezVousInfirmier(infSelect));
+
+		} catch (Exception e) {
+			System.out.println("Veuillez choisir parmis les options proposee");
+
+		} finally {
+			afficherProchainRdvInf();
+		}
 
 		menu();
 	}
 
 	public static void afficherProchainRdvPatient() {
 
-		
 		afficherListePatient();
 		System.out.println("Veuillez selectionner le numero associe au patient dans la liste");
 
@@ -290,11 +246,11 @@ public class Main implements Serializable {
 			int valSelect = entrerUsager.nextInt();
 			Patient patSelect = clinique.getPatient(valSelect);
 			System.out.println(clinique.getCalendrier().obtenirProchainRendezVousPatient(patSelect));
-			
+
 		} catch (Exception e) {
 			System.out.println("Veuillez choisir parmis les options proposee");
 
-		}finally {
+		} finally {
 			afficherProchainRdvPatient();
 		}
 
